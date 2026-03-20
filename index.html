@@ -10,16 +10,18 @@
   <link rel="icon" href="/assets/logo.png">
 </head>
 <body>
+  <div id="global-status" role="status" aria-live="polite" style="display:none;position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:9999;padding:.5rem 1rem;border-radius:6px;background:#111;color:#fff;"></div>
+
   <header class="nav">
     <div class="container">
       <div class="nav-left">
-        <img src="/assets/logo.png" alt="MyQuota" class="nav-logo">
+        <img src="/assets/logo.png" alt="MyQuota" class="nav-logo" width="40" height="40">
         <span class="brand">MyQuota</span>
       </div>
       <div class="nav-right">
         <a class="link" href="#problem">Problema</a>
         <a class="link" href="#solution">Solución</a>
-        <a class="btn btn-primary" href="#waitlist">Join waitlist</a>
+        <a class="btn btn-primary" href="#waitlist">Únete a la lista de espera</a>
       </div>
     </div>
   </header>
@@ -35,14 +37,14 @@
             <form id="waitlist" class="waitlist" action="/waitlist" method="POST">
               <label for="email" class="visually-hidden">Correo electrónico</label>
               <input id="email" name="email" type="email" placeholder="Tu correo — sé el primero" required>
-              <button class="btn btn-primary" type="submit">Get early access</button>
+              <button class="btn btn-primary" type="submit">Acceso anticipado</button>
             </form>
 
-            <p class="muted small">Be the first to try MyQuota • Coming soon • Building in public</p>
+            <p class="muted small">Sé el primero en probar MyQuota • Próximamente • Construyendo en público</p>
           </div>
 
           <div class="hero-note" aria-hidden="true">
-            <div class="card note">Currently in development</div>
+            <div class="card note">En desarrollo</div>
           </div>
         </div>
       </div>
@@ -99,7 +101,7 @@
 
     <section class="section trust">
       <div class="container">
-        <h2>Early stage &amp; transparent</h2>
+        <h2>Etapa inicial y transparente</h2>
         <p class="muted">Estamos construyendo en público. Únete a la lista de espera para recibir actualizaciones y acceso anticipado.</p>
       </div>
     </section>
@@ -107,11 +109,11 @@
     <section class="section final-cta">
       <div class="container">
         <div class="card cta">
-          <h2>Be the first to try MyQuota</h2>
-          <p class="muted">Get early access and updates as we ship features.</p>
+          <h2>Sé el primero en probar MyQuota</h2>
+          <p class="muted">Acceso anticipado y actualizaciones a medida que lanzamos funcionalidades.</p>
           <form action="/waitlist" method="POST" class="waitlist-inline">
             <input name="email" type="email" placeholder="Email address" required>
-            <button class="btn btn-primary" type="submit">Join the waitlist</button>
+            <button class="btn btn-primary" type="submit">Únete</button>
           </form>
         </div>
       </div>
@@ -120,8 +122,8 @@
 
   <footer class="site-foot">
     <div class="container foot-grid">
-      <div>© MyQuota — Clarity over your installments</div>
-      <div class="muted">Privacy • Terms</div>
+      <div>© MyQuota — Claridad sobre tus cuotas</div>
+      <div class="muted">Privacidad • Términos</div>
     </div>
   </footer>
 
@@ -133,14 +135,22 @@ function postForm(form){
     const data = new FormData(form);
     const res = await fetch(form.action, {method: 'POST', body: data});
     if(res.ok){
-      alert('Gracias — te agregamos a la lista de espera.');
+      showStatus('Gracias — te agregamos a la lista de espera.');
       form.reset();
     } else {
-      alert('Ocurrió un error. Intenta más tarde.');
+      showStatus('Ocurrió un error. Intenta más tarde.');
     }
   });
 }
 document.querySelectorAll('form.waitlist, form.waitlist-inline').forEach(postForm);
+
+function showStatus(message){
+  const el = document.getElementById('global-status');
+  if(!el) return alert(message);
+  el.textContent = message;
+  el.style.display = 'block';
+  setTimeout(()=> el.style.display = 'none', 4000);
+}
 </script>
 </body>
 </html>
