@@ -1,0 +1,6 @@
+#!/bin/sh
+# Hook pre-commit para ejecutar lint-staged
+# Nota: ejecutar localmente `npm run prepare` para instalar los hooks de husky
+. "$(dirname "$0")/_/husky.sh"
+
+npx --no-install lint-staged
