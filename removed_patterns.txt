@@ -1,0 +1,8 @@
+PATTERN: logs/
+PATTERN: docs/verify/
+PATTERN: .github.backup*
+PATTERN: .github.moved*
+PATTERN: *.pre-fix.*
+PATTERN: index.html.pre-fix.*
+PATTERN: tsconfig.json.pre-fix.*
+PATTERN: .eslintrc.cjs.pre-fix.*

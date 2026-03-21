@@ -1,0 +1,7 @@
+remote: 
+remote: Create a pull request for 'chore/clean-repo-remove-logs' on GitHub by visiting:        
+remote:      https://github.com/cabrerojas/myquota-page/pull/new/chore/clean-repo-remove-logs        
+remote: 
+To github.com:cabrerojas/myquota-page.git
+ * [new branch]      chore/clean-repo-remove-logs -> chore/clean-repo-remove-logs
+Branch 'chore/clean-repo-remove-logs' set up to track remote branch 'chore/clean-repo-remove-logs' from 'origin'.

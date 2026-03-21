@@ -1,0 +1,5 @@
+A  .gitignore
+?? git_status.txt
+?? removed_patterns.txt
+?? secret_matches.txt
+?? staged_files.txt

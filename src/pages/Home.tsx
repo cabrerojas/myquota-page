@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { getABVariant } from '@/lib/ab';
+import { pushEvent } from '@/lib/analytics';
 
 const Home: React.FC = () => {
+  useEffect(() => {
+    const variant = getABVariant();
+    pushEvent('ab_assignment', { variant, source: 'page_load' });
+    pushEvent('view_hero', { variant, source: 'hero' });
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-slate-900">
       <header className="py-6 px-4 border-b">
@@ -32,26 +40,15 @@ const Home: React.FC = () => {
             <div className="grid gap-8 md:grid-cols-2 items-center">
               <div>
                 <h1 className="text-3xl font-extrabold mb-4">
-                  Claridad sobre tus cuotas. Controla tus pagos con certeza.
+                  Ahorra hasta 20% en tus cuotas. Control total de tus pagos.
                 </h1>
                 <p className="text-slate-600 mb-6">
-                  MyQuota te ayudará a conocer cuánto debes, cuándo vence cada cuota y cómo afecta
-                  tus finanzas mensuales. Actualmente en desarrollo.
+                  MyQuota consolida tus cuotas y te muestra cuándo pagar, cómo priorizar y cuánto
+                  podrías ahorrar con mejores decisiones. Únete a la lista de espera.
                 </p>
 
-                <form id="waitlist" className="flex gap-2" action="/waitlist" method="POST">
-                  <input
-                    aria-label="Correo electrónico"
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="Tu correo — sé el primero"
-                    className="px-3 py-2 border rounded w-full"
-                  />
-                  <button className="px-4 py-2 bg-sky-600 text-white rounded">
-                    Get early access
-                  </button>
-                </form>
+                {/* Waitlist form component will be mounted client-side */}
+                <div id="waitlist-component"></div>
               </div>
 
               <div aria-hidden="true" className="bg-slate-50 p-6 rounded shadow">

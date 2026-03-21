@@ -1,0 +1,34 @@
+Resumen:
+Se elimina del control de versiones logs locales, reportes y backups que no deben subirse al remoto. Se han añadido patrones relevantes a .gitignore para evitar que se vuelvan a indexar.
+
+Qué se elimina:
+- logs/
+- docs/verify/
+- .github.backup*
+- .github.moved*
+- *.pre-fix.*
+- index.html.pre-fix.*
+- tsconfig.json.pre-fix.*
+- .eslintrc.cjs.pre-fix.*
+
+Por qué:
+Estos archivos/dirs son generados localmente o son backups temporales; mantenerlos en el repo genera ruido y conflictos. No se borraron archivos del disco; permanecen localmente.
+
+Cómo reproducir localmente:
+1. git fetch origin
+2. git checkout chore/clean-repo-remove-logs
+3. git status --porcelain
+4. git ls-files | grep -E 'logs/|docs/verify|.github.backup|.github.moved|pre-fix'
+
+Nota de despliegue:
+La ruta de despliegue es una variable privada referida como DEPLOY_TARGET (no se muestra aquí).
+
+Checklist:
+- [ ] Verificar build localmente
+- [ ] Correr tests locales
+- [ ] Revisar assets y placeholders
+
+Comando útil:
+"copia compilado"
+
+No se incluyen rutas privadas en el PR.
