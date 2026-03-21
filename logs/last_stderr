@@ -1,8 +1,0 @@
-[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
-x Build failed in 14ms
-error during build:
-Could not resolve entry module "index.html".
-    at getRollupError (file:///root/.openclaw/workspace/projects/myquota-page/node_modules/rollup/dist/es/shared/parseAst.js:402:41)
-    at error (file:///root/.openclaw/workspace/projects/myquota-page/node_modules/rollup/dist/es/shared/parseAst.js:398:42)
-    at ModuleLoader.loadEntryModule (file:///root/.openclaw/workspace/projects/myquota-page/node_modules/rollup/dist/es/shared/node-entry.js:21731:20)
-    at async Promise.all (index 0)
