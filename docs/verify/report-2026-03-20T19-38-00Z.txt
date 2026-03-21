@@ -1,0 +1,122 @@
+Verification report for myquota-page
+Timestamp: 2026-03-20T19:38:00Z
+
+SUMMARY
+-------
+status: partial
+executive_summary: No existe package.json en la ruta esperada; las dependencias no pudieron instalarse y por tanto no fue posible ejecutar lint/build/preview. Hay copias de seguridad (package.json.moved / package.json.backup) que contienen los scripts esperados.
+
+DETAILS
+-------
+
+1) package.json
+----------------
+- package.json (original): NO ENCONTRADO
+- Encontrados archivos relacionados:
+  - package.json.moved.1774034342 (leído)
+  - package.json.backup.1774034342 (leído)
+
+Scripts (desde package.json.moved):
+  dev: "vite"
+  build: "vite build"
+  preview: "vite preview"
+  lint: "eslint . --ext .ts,.tsx"
+  test: "vitest"
+  format: "prettier --write ."
+  deploy:copy: "rsync -av --delete dist/ \"$DEPLOY_TARGET\" || cp -r dist/* \"$DEPLOY_TARGET\""
+  deploy:note: echo note
+
+Scripts (desde package.json.backup):
+  dev, build, preview, lint (with stricter pattern), lint:fix, format, format:check, prepare
+
+Observación: los scripts relevantes (dev, build, lint, preview) existen en las copias, pero el archivo package.json principal no está presente, por eso npm no puede operar.
+
+2) npm ci
+---------
+Salida completa (stdout+stderr):
+
+npm error code EUSAGE
+npm error
+npm error The `npm ci` command can only install with an existing package-lock.json or
+npm error npm-shrinkwrap.json with lockfileVersion >= 1. Run an install with npm@5 or
+npm error later to generate a package-lock.json file, then try again.
+npm error
+npm error Clean install a project
+npm error
+npm error Usage:
+npm error npm ci
+npm error
+npm error Options:
+npm error [--install-strategy <hoisted|nested|shallow|linked>] [--legacy-bundling]
+npm error [--global-style] [--omit <dev|optional|peer> [--omit <dev|optional|peer> ...]]
+npm error [--include <prod|dev|optional|peer> [--include <prod|dev|optional|peer> ...]]
+npm error [--strict-peer-deps] [--foreground-scripts] [--ignore-scripts]
+npm error [--allow-git <all|none|root>] [--no-audit] [--no-bin-links] [--no-fund]
+npm error [--dry-run]
+npm error [-w|--workspace <workspace-name> [-w|--workspace <workspace-name> ...]]
+npm error [--workspaces] [--include-workspace-root] [--install-links]
+npm error
+npm error aliases: clean-install, ic, install-clean, isntall-clean
+npm error
+npm error Run "npm help ci" for more info
+npm error A complete log of this run can be found in: /root/.npm/_logs/2026-03-20T19_37_52_747Z-debug-0.log
+
+3) npm install (fallback attempted)
+------------------------------------
+Salida completa (stdout+stderr):
+
+npm error code ENOENT
+npm error syscall open
+npm error path /root/.openclaw/workspace/projects/myquota-page/package.json
+npm error errno -2
+npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/root/.openclaw/workspace/projects/myquota-page/package.json'
+npm error enoent This is related to npm not being able to find a file.
+npm error enoent
+npm error A complete log of this run can be found in: /root/.npm/_logs/2026-03-20T19_37_55_347Z-debug-0.log
+
+4) lint / build / preview
+-------------------------
+- No se pudieron ejecutar porque npm no pudo instalar dependencias ni acceder a package.json.
+- Alternativa: restaurar package.json desde package.json.moved (o backup), luego ejecutar:
+  - npm ci (si existe package-lock.json) o npm install
+  - npm run lint
+  - npm run build
+  - npm run preview
+
+5) dist inspection
+------------------
+- No existe carpeta dist/ ya que no se pudo ejecutar build.
+
+6) lighthouse / lhci
+---------------------
+- No se ejecutó. Si se desea, pasos locales:
+  - Asegurarse de tener build -> dist
+  - Instalar localmente: npm install -D @lhci/cli lighthouse
+  - Ejecutar auditoría ligera: npx lighthouse http://localhost:5173 --quiet --output=json --output-path=lh-report.json
+  - Para CI: configurar LHCI with upload to server or use github action
+
+ARTIFACTS CREADOS DURANTE LA VERIFICACIÓN
+----------------------------------------
+- Ninguno (node_modules y dist no fueron creados). Este informe fue guardado en:
+  docs/verify/report-2026-03-20T19-38-00Z.txt
+
+NEXT ACTIONS (recomendado)
+--------------------------
+1) Restaurar package.json en la raíz del proyecto. Opciones:
+   - Mover/renombrar package.json.moved.1774034342 -> package.json
+   - O usar el contenido de package.json.backup.1774034342 para reconstruir package.json
+2) Si hay un package-lock.json en remoto/otro branch, restaurarlo.
+3) Ejecutar:
+   - npm ci (preferible si hay package-lock.json)
+   - npm run lint
+   - npm run build
+   - npm run preview
+4) Opcional: añadir package-lock.json al repositorio para reproducibilidad de CI.
+
+RISKS
+-----
+- Riesgo de builds diferentes en CI si falta package-lock.json.
+- Posible configuración o paths privados olvidados en deploy scripts (observación: deploy:copy usa DEPLOY_TARGET env var - esto es intencional).
+- Si el proyecto depende de paquetes privados no publicados, la instalación fallará en entornos sin acceso.
+
+END REPORT
