@@ -1,0 +1,10 @@
+/node_modules
+/dist
+/logs
+/docs/verify
+*.pre-fix.*
+.github.backup*/
+.github.moved*/
+index.html.pre-fix.*
+tsconfig.json.pre-fix.*
+.eslintrc.cjs.pre-fix.*
