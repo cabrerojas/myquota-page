@@ -20,7 +20,7 @@ const Home: React.FC = () => {
               href="#waitlist"
               className="text-sm ml-3 inline-block bg-sky-600 text-white px-3 py-1 rounded"
             >
-              Join waitlist
+              Quiero acceso anticipado
             </a>
           </nav>
         </div>
@@ -32,12 +32,19 @@ const Home: React.FC = () => {
             <div className="grid gap-8 md:grid-cols-2 items-center">
               <div>
                 <h1 className="text-3xl font-extrabold mb-4">
-                  Claridad sobre tus cuotas. Controla tus pagos con certeza.
+                  Todas tus cuotas en un solo lugar, sin sorpresas a fin de mes.
                 </h1>
                 <p className="text-slate-600 mb-6">
-                  MyQuota te ayudará a conocer cuánto debes, cuándo vence cada cuota y cómo afecta
-                  tus finanzas mensuales. Actualmente en desarrollo.
+                  MyQuota te muestra cuánto debes realmente, qué vence primero y cómo impacta cada
+                  cuota en tu presupuesto para que decidas con claridad.
                 </p>
+
+                <a
+                  href="#solution"
+                  className="inline-block mb-4 text-sky-700 font-medium hover:text-sky-800"
+                >
+                  Ver cómo funciona
+                </a>
 
                 <form id="waitlist" className="flex gap-2" action="/waitlist" method="POST">
                   <input
@@ -49,18 +56,27 @@ const Home: React.FC = () => {
                     className="px-3 py-2 border rounded w-full"
                   />
                   <button className="px-4 py-2 bg-sky-600 text-white rounded">
-                    Get early access
+                    Quiero acceso anticipado
                   </button>
                 </form>
               </div>
 
               <div aria-hidden="true" className="bg-slate-50 p-6 rounded shadow">
-                <div className="text-sm text-slate-500">Currently in development</div>
+                <div className="text-sm text-slate-500">En desarrollo actualmente</div>
                 <div className="mt-4">
                   <ul className="space-y-2 text-slate-700">
-                    <li>📥 Rastreo sencillo de cuotas</li>
-                    <li>📈 Visión consolidada de deuda</li>
-                    <li>🔔 Insights y alertas</li>
+                    <li>
+                      Sin fórmulas ni mantenimiento manual: MyQuota organiza tus cuotas
+                      automáticamente en una vista accionable.
+                    </li>
+                    <li>
+                      Todo queda centralizado y ordenado; no dependes de memoria ni de múltiples
+                      apps desconectadas.
+                    </li>
+                    <li>
+                      No te limita a una sola entidad: MyQuota te da una visión unificada de todas
+                      tus cuotas y deuda total.
+                    </li>
                   </ul>
                 </div>
               </div>
