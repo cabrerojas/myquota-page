@@ -107,7 +107,7 @@ const Home: React.FC = () => {
                     name="email"
                     type="email"
                     required
-                    placeholder="Tu correo — sé el primero"
+                    placeholder="Tu correo — acceso anticipado"
                     className="px-3 py-2 border rounded w-full"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
@@ -140,7 +140,7 @@ const Home: React.FC = () => {
               </div>
 
               <div aria-hidden="true" className="bg-slate-50 p-6 rounded shadow">
-                <div className="text-sm text-slate-500">En desarrollo actualmente</div>
+                <div className="text-sm text-slate-500">En desarrollo</div>
                 <div className="mt-4">
                   <ul className="space-y-2 text-slate-700">
                     <li>
